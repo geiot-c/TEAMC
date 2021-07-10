@@ -6,20 +6,44 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<link rel="stylesheet" type=text/css href="/css/main.css">
 </head>
-<p>Hello world</p>
-<p>Hello index</p>
+<body style="background-color: #f4f4f4" class="">
+	<div id = "top">
+		<p class= mid>インスタ映えしそうな写真を選んでください</p>
+	</div>
+<div  id = "container">
+    <div id="main">
 
-<button id="get_candidates">get_candidates</button>
-<button id="send_result">send_result</button>
-<form action="/result" method="get">
-    <input type="radio" name="ids" value=1>はい
-    <input type="radio" name="ids" value=2>いいえ
-    <br>
-    <input type="submit">
-</form>
-
+        <div class="main_margin">
+        <p>Hello world</p>
+        <p>Hello index</p>
+        <div class= lnd>
+        </div>
+        <div class= lthan30>
+        </div>
+        <div class= sthan30>
+        </div>
+        
+        <button id="send_result">send_result</button>
+        </div>
+    </div>
+</div>
+</body>
 <script>
-    $(function () {
+
+$(function () {
+    $.get("/select/candidates")
+        .done(function( data ) {
+            $.each(data, function(index, value){
+                let atr = index;
+                console.log("."+atr)
+                $.each(value, function(index, value){
+                    console.log(value);
+                    console.log('<img src=/image/'+decodeURIComponent(value.Name)+'.png alt='+value.Name+'>');
+                    $("."+atr).append("<p>"+value.Name+"</p>");
+                    $("."+atr).append('<img src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.Name+'>');
+                })
+            })
+        });
     $('#get_candidates').click(function(){
     $.get("/select/candidates")
         .done(function( data ) {
@@ -29,10 +53,6 @@
     this.ids = [1,3,5,6]
     $('#send_result').click(function(){
         window.location.href="/result"+"?ids=" + $.param([1,3,5,6])//this.ids
-    /*$.get("/result",{ ids: [1,3,5,6] })
-        .done(function( data ){
-            window.location.href =data;
-        })*/
     });
 });
 </script>
