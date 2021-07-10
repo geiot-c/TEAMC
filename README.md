@@ -6,7 +6,7 @@ docker-compose up -d -build
 コンテナ内確認(bashログイン):   
 docker exec -it app bash  
 削除：  
-docker-compose down    
+docker-compose down -v  
 ログ確認:  
 docker-compose logs  
 コンテナ生死確認  
