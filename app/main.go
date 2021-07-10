@@ -21,7 +21,9 @@ func main() {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
 
-	engine.POST("/result", controller.GetCandidates)
+	engine.GET("/select/candidates", controller.GetCandidates)
+
+	engine.POST("/result", controller.GetResult)
 
 	err := engine.Run(":8080")
 	if err != nil {
