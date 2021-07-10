@@ -23,6 +23,9 @@ func main() {
 
 	engine.GET("/select/candidates", controller.GetCandidates)
 
+	engine.GET("/result", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "result.html", gin.H{})
+	})
 	engine.POST("/result", controller.GetResult)
 
 	err := engine.Run(":8080")
