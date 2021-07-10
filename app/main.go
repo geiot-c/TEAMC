@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 
+	"TEAMC/controller"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +20,8 @@ func main() {
 	engine.GET("/select", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
+
+	engine.POST("/result", controller.GetCandidates)
 
 	err := engine.Run(":8080")
 	if err != nil {
