@@ -10,10 +10,10 @@ import (
 func main() {
 	engine := gin.Default()
 
-	engine.LoadHTMLGlob("./*.html")
-	engine.Static("/js", "./js")
-	engine.Static("/css", "./css")
-	engine.Static("/image", "./image")
+	engine.LoadHTMLGlob("./static/html/*.html")
+	engine.Static("/js", "./static/js")
+	engine.Static("/css", "./static/css")
+	engine.Static("/image", "./static/image")
 
 	engine.GET("/select", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
