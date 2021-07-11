@@ -16,17 +16,17 @@ services:
             - ./app:/go/src/TEAMC
         ports: 
             - "8080:8080"
-        # depends_on: 
-        #     - db
+        depends_on: 
+            - db
 
-    # db:
-    #     container_name: db
-    #     build:
-    #         context: ./db
-    #         dockerfile: Dockerfile
-    #     # volumes:
-    #     # - mysql_vol:/var/lib/mysql:delegated
-    #     environment:
-    #     - MYSQL_ROOT_PASSWORD=test
-    #     ports:
-    #     - "3306:3306"        
+    db:
+        container_name: db
+        build:
+            context: ./db
+            dockerfile: Dockerfile
+        # volumes:
+        # - mysql_vol:/var/lib/mysql:delegated
+        environment:
+        - MYSQL_ROOT_PASSWORD=test
+        ports:
+        - "3306:3306"        
