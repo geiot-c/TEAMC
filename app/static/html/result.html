@@ -16,6 +16,8 @@
                 <div class="main_margin">
                     <div id= "res_img">
                     </div>
+                    <div id= "res_smart_img">
+                    </div>
                 </div>
             </div>
 </body>
@@ -40,8 +42,24 @@
                 //$("."+atr).append("<p>"+value.Name+"</p>");
                 $("#res_img").append('<div><img id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.name+' width="250" height="250"><p>'+value.name+'</p></div>');
                 $("#res_img").append('<img id="arrow" src="/image/arrow.png" alt= "arrow" width="68" height="50">');
+                $("#res_smart_img").append('<div><img id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.name+' width="250" height="250"><p>'+value.name+'</p></div>');
+                $("#res_smart_img").append('<img id="arrow" src="/image/arrow_down.png" alt= "arrow" width="50" height="68">');
                 
             })
         });
+        if (window.matchMedia( '(min-width: 900px)' ).matches) {
+    $(function(){
+        $('#res_smart_img').hide();
+        $('#res_img').show();
+
+    });    //600px以下の場合
+    } 
+    else {
+    $(function(){
+        $('#res_smart_img').show();
+        $('#res_img').hide();
+
+    }); 
+    };
     });
 </script>

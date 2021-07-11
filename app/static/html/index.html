@@ -21,6 +21,8 @@
         </div>
         <div id= sthan30>
         </div>
+        <div id= all>
+        </div> 
 
 
     </div>
@@ -39,6 +41,7 @@ $(function () {
                 $.each(value, function(index, value){
                     //$("."+atr).append("<p>"+value.Name+"</p>");
                     $("#"+atr).append('<img class ="img_clk" id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.Name+' width="250" height="250">');
+                    $("#all").append('<img class ="img_clk" id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.Name+' width="250" height="250">');
                     selected_ids[value.id]=0;
                 })
             })
@@ -77,6 +80,22 @@ $(function () {
         window.location.href="/result"+"?" + $.param({"ids":ids})//this.ids
 
     });
-
+    if (window.matchMedia( '(min-width: 900px)' ).matches) {
+    $(function(){
+        $('#all').hide();
+        $('#lnd').show();
+        $('#lthan30').show();
+        $('#sthan30').show();  
+    });    //600px以下の場合
+    } 
+    else {
+    $(function(){
+        $('#all').show();
+        $('#lnd').hide();
+        $('#lthan30').hide();
+        $('#sthan30').hide();
+    }); 
+    };
+    
 });
 </script>
