@@ -6,24 +6,31 @@
 
 	--bg-color: #ffffff;
 	--font-color:#000000;
-	--sub-color:#007C45;
+	--sub-color:#FBE5D6;
 	--sub-sub-color:#003087;
 }
 p{
 	padding : 0px ;
 	margin: 0px;
 }
-
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
 li{
 	list-style: none;
 }
 #top{
 	display: block;	
 	padding : 20px ;
-	margin: 30px;
-	color:white;
+	color:black;
 	background: var(--sub-color);
 	text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 #top p{
 	padding : 0px ;
@@ -49,9 +56,7 @@ li{
     display: block;
     margin-left: auto;
     margin-right: auto ;
-	box-shadow:inset 0px 1px 0px 0px #9acc85;
-	background-color:#74ad5a;
-	border:1px solid #3b6e22;
+	background-color:var(--sub-sub-color);
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
