@@ -7,7 +7,7 @@
 	--bg-color: #ffffff;
 	--font-color:#000000;
 	--sub-color:#FBE5D6;
-	--sub-sub-color:#003087;
+	--sub-sub-color:#E7E7E7;
 }
 p{
 	padding : 0px ;
@@ -22,9 +22,23 @@ p{
 li{
 	list-style: none;
 }
+#samune{
+
+    display: flex;
+    position: absolute;
+    z-index: ３;
+    justify-content: center;/* 左右中央を指定しています */
+    align-items: center;/* 上下中央を指定しています */
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--sub-color);
+}
+#samune .samune_logo{
+
+}
 #top{
 	display: block;	
-	padding : 20px ;
+	padding : 10px ;
 	color:black;
 	background: var(--sub-color);
 	text-align: center;
@@ -47,31 +61,32 @@ li{
     justify-content: center;
 	display: flex;
 }
-
-.container{
-
-	margin-bottom: 40px;
+#shops{   
+    text-align: center;
+    margin: auto;
+    width: 250px;                /* 横幅を200pxに指定 */
+    height: 500px;               /* 横幅を200pxに指定 */
+    /*border: 1px solid #000;      /* わかりやすくボーダーを引く */
+    overflow-y: scroll;   
+    -ms-overflow-style: none;    /* IE, Edge 対応 */
+    scrollbar-width: none;       /* Firefox 対応 */
 }
-#send_result {
-    display: block;
-    margin-left: auto;
-    margin-right: auto ;
-	background-color:var(--sub-sub-color);
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:13px;
-	font-weight:bold;
-	padding:6px 12px;
-	text-decoration:none;
+#shops::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+    display:none;
 }
-#send_result:hover {
-	background:linear-gradient(to bottom, #68a54b 5%, #74ad5a 100%);
-	background-color:#68a54b;
+#shops li{
+    text-align: center;
+    margin: auto;
 }
-#send_result:active {
-	position:relative;
-	top:1px;
+#shop_container{
+    border-radius:10px;
+    margin: 10px;
+    padding: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: var(--sub-sub-color);
+    justify-content: center;
+	display: flex;
 }
 
         
@@ -126,104 +141,12 @@ li{
     padding-bottom: 5px;
 
 }
-#lnd{
-    width: 300px;                /* 横幅を200pxに指定 */
-    height: 500px;               /* 横幅を200pxに指定 */
-    /*border: 1px solid #000;       わかりやすくボーダーを引く */
-    overflow-y: scroll;   
-    -ms-overflow-style: none;    /* IE, Edge 対応 */
-    scrollbar-width: none;       /* Firefox 対応 */
-    text-align: center;
-    filter:linear-gradient(to right, #2af598 0%, #009efd 100%);
-}
-#lnd:after {/*グラデーションを作成して画像の上に配置*/
-    background-image: linear-gradient(0deg, #1199c4, #B10DC9);
-    
+/*vueの設定*/
+.v-enter-active, .v-leave-actibe {
+    transition: opacity 1s;
   }
-#lnd::-webkit-scrollbar {  /* Chrome, Safari 対応 */
-    display:none;
-}
-
-
-#lthan30{    
-    width: 300px;                /* 横幅を200pxに指定 */
-    height: 500px;               /* 横幅を200pxに指定 */
-    /*border: 1px solid #000;      /* わかりやすくボーダーを引く */
-    overflow-y: scroll;   
-    -ms-overflow-style: none;    /* IE, Edge 対応 */
-    scrollbar-width: none;       /* Firefox 対応 */
-}
-#lthan30::-webkit-scrollbar {  /* Chrome, Safari 対応 */
-    display:none;
-}
-
-#sthan30{    
-    width: 300px;                /* 横幅を200pxに指定 */
-    height: 500px;               /* 横幅を200pxに指定 */
-    /*border: 1px solid #000;      /* わかりやすくボーダーを引く */
-    overflow-y: scroll;   
-    -ms-overflow-style: none;    /* IE, Edge 対応 */
-    scrollbar-width: none;       /* Firefox 対応 */
-}
-#sthan30::-webkit-scrollbar {  /* Chrome, Safari 対応 */
-    display:none;
-}
-#all{    
-    width: 300px;                /* 横幅を200pxに指定 */
-    height: 500px;               /* 横幅を200pxに指定 */
-    /*border: 1px solid #000;      /* わかりやすくボーダーを引く */
-    overflow-y: scroll;   
-    -ms-overflow-style: none;    /* IE, Edge 対応 */
-    scrollbar-width: none;       /* Firefox 対応 */
-}
-#all::-webkit-scrollbar {  /* Chrome, Safari 対応 */
-    display:none;
-}
-#res_img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto ;
-    width: 1000px;                /* 横幅を200pxに指定 */
-    height: 300px;               /* 横幅を200pxに指定 */
-    /*border: 1px solid #000;       わかりやすくボーダーを引く */
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
-    overflow-x: scroll; 
-    padding: 10px;
-    -ms-overflow-style: none;    /* IE, Edge 対応 */
-    scrollbar-width: none;       /* Firefox 対応 */
-}
-#res_img::-webkit-scrollbar {  /* Chrome, Safari 対応 */
-    display:none;
-}
-#res_smart_img{
-    width: 300px;                /* 横幅を200pxに指定 */
-    height: 500px;               /* 横幅を200pxに指定 */
-    /*border: 1px solid #000;      /* わかりやすくボーダーを引く */
-    overflow-y: scroll;   
-    -ms-overflow-style: none;    /* IE, Edge 対応 */
-    scrollbar-width: none;       /* Firefox 対応 */
-    text-align: center;
-    padding: 10px;
-}
-#res_smart_img::-webkit-scrollbar {  /* Chrome, Safari 対応 */
-    display:none;
-}
-#res_smart_img img{
-    padding-bottom: 15px;
-}
-#arrow{
-    display: inline-block; /* インライン要素にすることで横に回り込む */
-    vertical-align: middle; /* 上下中央に寄せる */ 
-    margin: auto;
-}
-#bottom{
-	padding : 30px ;
-	margin-top: 30px;
-	color:white;
-	background: var(--sub-color);
-	text-align: center;
-}
+  
+  .v-enter, .v-leave-to {
+    opacity: 0;
+    transition: opacity 1s;
+  }
