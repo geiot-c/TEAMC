@@ -15,6 +15,15 @@ var shops = new Vue({
             console.log(shops.infos)
         });
     },
+    methods: {
+        // メソッドhalfPriceを定義
+        redirect: function(i) {
+
+            console.log(i)
+
+            window.location.href="/result"+"?" + $.param({"ids":[i]});
+        }
+    }
 });
 var samune = new Vue({
     el: '#samune',
@@ -28,6 +37,7 @@ var samune = new Vue({
           　//フェードアウトだけjQueryで書くよ　ごめんね
           $('#samune').fadeOut(700, function(ob = this) {
             samune.seen=false;
+            console.log("test")
         });
         }
     }

@@ -22,15 +22,14 @@
         <p>category</p>
 	</div>
 <div id = shops>
-
     <ul>
     <li v-for="info in infos" >
         
         <div id = shop_container>
         <table >
         <tr>
-            <td  align="center" colspan="4">
-                <img class ="logo" v-bind:src="'/image/'+info.id+'.jpg'" alt='Logo' height="200">
+            <td v-bind:_id = "info.id"  v-on:click="redirect(info.id)"  align="center" colspan="4" >
+                <img  class ="img_clk"  v-bind:src="'/image/'+info.id+'.jpg'" alt='Logo' height="200">
             </td>
         </tr>
         <tr>
@@ -40,7 +39,7 @@
         </tr>
         <tr>
             <td>
-                <img align="left"  class ="logo" src="/image/cart.png" alt='Logo' height="30">
+                <img align="left"   src="/image/cart.png" alt='Logo' height="30">
             </td>
             <td colspan="3">
                 &nbsp;
@@ -49,7 +48,7 @@
 
         <tr>
             <td>
-                <img align="left" class ="logo" src="/image/pin.png" alt='Logo' height="30">
+                <img align="left" src="/image/pin.png" alt='Logo' height="30">
             </td>
             <td>
                 <samp>
@@ -57,7 +56,7 @@
                 </samp>
             </td>
             <td>
-                <img align="right"  class ="logo" src="/image/good.png" alt='Logo' height="30">
+                <img align="right"  src="/image/good.png" alt='Logo' height="30">
             </td>
             <td>
                 <p>15</p>
