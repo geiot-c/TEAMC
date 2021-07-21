@@ -1,9 +1,10 @@
+CREATE DATABASE `TEAMC` DEFAULT CHARACTER SET utf8mb4;
+USE `TEAMC`;
 DROP TABLE IF EXISTS shops;
 
 CREATE TABLE IF NOT EXISTS shops (
   id integer PRIMARY KEY AUTO_INCREMENT,
-  -- name of recipe
-  shop_name varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  shop_name varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 );
 
 INSERT INTO shops (

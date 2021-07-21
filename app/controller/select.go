@@ -44,7 +44,7 @@ func GetCandidates(c *gin.Context) {
 func GetResult(c *gin.Context) {
 	SelectedShops := []SelectedShop{}
 
-	fmt.Println(c.Query("ids"))
+	fmt.Println(c.PostFormArray("ids[]"))
 
 	SelectedShops = append(SelectedShops, SelectedShop{"1", "栗"})
 	SelectedShops = append(SelectedShops, SelectedShop{"2", "おんどり"})
