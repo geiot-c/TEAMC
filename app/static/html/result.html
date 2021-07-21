@@ -4,62 +4,37 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<link rel="stylesheet" type=text/css href="/css/main.css">
 </head>
 <body>
-    <body style="background-color: #f4f4f4" class="">
-        <div id = "top">
-            <p class= mid>こんなプランはいかがでしょうか？</p>
-        </div>
-        <div  id = "container">
-            <div id="main">
-                <div class="main_margin">
-                    <div id= "res_img">
-                    </div>
-                    <div id= "res_smart_img">
-                    </div>
-                </div>
+    <button class ="logo" onclick="location.href='/select'"> 
+        <img src="/image/CTeam_Logo.png" alt='Logo' height="100">
+    </button>
+    <div id = "top"></div>
+    <div id = res>
+        <img    class ="img_clk"  v-bind:src="'/image/'+selcted+'.jpg'"  alt='Logo' height="200">
+        <hr>
+        <table class="recommend">
+            <tbody>
+                <tr>
+                    <td width = "100%">
+                        おすすめの店
+                    </td>
+                    <td v-on:click="redirect(recommend)"  width = "110" rowspan="2"><img  class ="img_clk"  v-bind:src="'/image/'+recommend+'.jpg'"alt='Logo' height="100"> </td>
+                </tr>
+                <tr>
+                    <td width = "100%">[(infos[recommend-1]["Name"])]</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        おすすめされた店
+        <div id= "his_img">
+            <div v-for="h in history" >
+                <img  class ="img_clk"  v-bind:src="'/image/'+(h)+'.jpg'"  alt='Logo' height="100">
             </div>
+        </div>
+    </div>
+    <script src="/js/result.js"></script>
 </body>
-<script>
-    $(function () {
-        var query = location.search.substr(1);
-        // 「&」で分割して、順に処理する
-        var params = [];
-        query.split("&").forEach(function (item) {
-            // 「=」でパラメーター名と値に分割して、paramsに追加
-            var s = item.split("=");
-            var k = decodeURIComponent(s[0]);
-            var v = decodeURIComponent(s[1]);
-            params.push(v);
-        });
-        console.log(params);
-        $.post("/result",{"ids":params})
-        .done(function( data ) {
-            console.log(data);
-            $.each(data.result, function(index, value){
-                let atr = index;
-                //$("."+atr).append("<p>"+value.Name+"</p>");
-                $("#res_img").append('<div><img id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.name+' width="250" height="250"><p>'+value.name+'</p></div>');
-                $("#res_img").append('<img id="arrow" src="/image/arrow.png" alt= "arrow" width="68" height="50">');
-                $("#res_smart_img").append('<div><img id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.name+' width="250" height="250"><p>'+value.name+'</p></div>');
-                $("#res_smart_img").append('<img id="arrow" src="/image/arrow_down.png" alt= "arrow" width="50" height="68">');
-                
-            })
-        });
-        if (window.matchMedia( '(min-width: 900px)' ).matches) {
-    $(function(){
-        $('#res_smart_img').hide();
-        $('#res_img').show();
-
-    });    //600px以下の場合
-    } 
-    else {
-    $(function(){
-        $('#res_smart_img').show();
-        $('#res_img').hide();
-
-    }); 
-    };
-    });
-</script>

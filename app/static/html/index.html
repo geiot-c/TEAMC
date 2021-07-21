@@ -3,99 +3,71 @@
 	<title>観光スポットセレクト</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link rel="stylesheet" type=text/css href="/css/main.css">
-</head>
-<body style="background-color: #f4f4f4" class="">
-	<div id = "top">
-		<p class= mid>インスタ映えしそうな写真を選んでください</p>
-	</div>
-<div  id = "container">
-    <div id="main">
-
-        <button id="send_result">send_result</button>
-        <div class="main_margin">
-        <div id= lnd>
-        </div>
-        <div id= lthan30>
-        </div>
-        <div id= sthan30>
-        </div>
-        <div id= all>
-        </div> 
-
-
-    </div>
-</div>
-</div>
-</body>
-<script>
-
-$(function () {
-    var selected_ids = {}
-    $.get("/select/candidates")
-        .done(function( data ) {
-            $.each(data, function(index, value){
-                let atr = index;
-                console.log("."+atr)
-                $.each(value, function(index, value){
-                    //$("."+atr).append("<p>"+value.Name+"</p>");
-                    $("#"+atr).append('<img class ="img_clk" id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.Name+' width="250" height="250">');
-                    $("#all").append('<img class ="img_clk" id='+value.id+' src=/image/'+decodeURIComponent(value.id)+'.jpg alt='+value.Name+' width="250" height="250">');
-                    selected_ids[value.id]=0;
-                })
-            })
-        }); 
-    $(document).on('click', '.img_clk', function(){
-        
-        if(selected_ids[this.id]==1){
-            selected_ids[this.id]=0
-            console.log("test");
-            console.log($.inArray(this.id, selected_ids));
-            $(this).removeClass('img_filter');
-        }
-        else{
-            $(this).addClass('img_filter');
-            selected_ids[this.id]=1
-        }
-    });
-    /*$('#img_clk').click(function(){
-        console.log("test");
-        console.log(this.alt);
-    });*/
-    $('#get_candidates').click(function(){
-    $.get("/select/candidates")
-        .done(function( data ) {
-            console.log(data)
-            
-        })
-    });
-    $('#send_result').click(function(){
-        let ids=[]
-        $.each(selected_ids, function(index, value){
-            if(value==1){
-                ids.push(index);
-            }
-        });
-        window.location.href="/result"+"?" + $.param({"ids":ids})//this.ids
-
-    });
-    if (window.matchMedia( '(min-width: 900px)' ).matches) {
-    $(function(){
-        $('#all').hide();
-        $('#lnd').show();
-        $('#lthan30').show();
-        $('#sthan30').show();  
-    });    //600px以下の場合
-    } 
-    else {
-    $(function(){
-        $('#all').show();
-        $('#lnd').hide();
-        $('#lthan30').hide();
-        $('#sthan30').hide();
-    }); 
-    };
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js",height></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type=text/css href="/css/main.css">
     
-});
-</script>
+</head>
+<body class="">
+    <div id =app>
+        <transition>
+            <div id=samune v-if="seen" 　v-on:click='fadeout()'>
+                <img class = "samune_logo" src="/image/CTeam_Logo.png" alt='Logo' height="200">
+            </div>
+        </transition>
+    </div>
+
+    <img class ="logo" src="/image/CTeam_Logo.png" alt='Logo' height="80">
+	<div id = "top">
+        <p>category</p>
+	</div>
+<div id = shops>
+    <ul>
+    <li v-for="info in infos" >
+        
+        <div id = shop_container>
+        <table >
+        <tr>
+            <td v-bind:_id = "info.id"  v-on:click="redirect(info.id)"  align="center" colspan="4" >
+                <img  class ="img_clk"  v-bind:src="'/image/'+info.id+'.jpg'" alt='Logo' height="200">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="4">
+                [info.Name]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img align="left"   src="/image/cart.png" alt='Logo' height="30">
+            </td>
+            <td colspan="3">
+                &nbsp;
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img align="left" src="/image/pin.png" alt='Logo' height="30">
+            </td>
+            <td>
+                <samp>
+                    &nbsp;
+                </samp>
+            </td>
+            <td>
+                <img align="right"  src="/image/good.png" alt='Logo' height="30">
+            </td>
+            <td>
+                <p>15</p>
+            </td>
+        </tr>
+    </table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<script src="/js/index.js"></script>
+</body>
+</html>
