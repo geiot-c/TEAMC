@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -24,6 +25,7 @@ func main() {
 	engine.GET("/select/candidates", controller.GetCandidates)
 
 	engine.GET("/result", func(c *gin.Context) {
+		fmt.Println(c.QueryArray("ids[]"))
 		c.HTML(http.StatusOK, "result.html", gin.H{})
 	})
 	engine.POST("/result", controller.GetResult)
