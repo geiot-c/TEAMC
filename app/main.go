@@ -24,11 +24,13 @@ func main() {
 
 	engine.GET("/select/candidates", controller.GetCandidates)
 
-	engine.GET("/result", func(c *gin.Context) {
+	engine.GET("/result/:id", func(c *gin.Context) {
 		fmt.Println(c.QueryArray("ids[]"))
+		fmt.Println(c.Param("id"))
 		c.HTML(http.StatusOK, "result.html", gin.H{})
 	})
-	engine.POST("/result", controller.GetResult)
+	engine.GET("/result/:id/status", controller.GetShopStatus)
+	engine.POST("/result/:id/status", controller.GetShopStatus)
 
 	err := engine.Run(":8080")
 	if err != nil {

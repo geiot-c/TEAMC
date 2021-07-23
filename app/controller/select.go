@@ -10,8 +10,9 @@ import (
 )
 
 type CandidateShop struct {
-	Id   string `json:"id"`
-	Name string `json:"Name"`
+	Id        string `json:"id"`
+	Name      string `json:"Name"`
+	SelfIntro string `json:"SelfIntro"`
 }
 
 type SelectedShop struct {
@@ -19,16 +20,23 @@ type SelectedShop struct {
 	Name string `json:"name"`
 }
 
+type ShopStatus struct {
+	model.Shop
+	Recommend   []model.Recommend `json:"recommend"`
+	RecommendBy []model.Recommend `json:"recommend_by"`
+	// model.RecommendBy
+}
+
 func GetCandidates(c *gin.Context) {
 	LunchAndDinner := []CandidateShop{}
 	LongerThanThirty := []CandidateShop{}
 	ShorterThanThirty := []CandidateShop{}
-	ids := []string{"test"}
-	res := model.FindShop(ids)
+	// ids := []string{"test"}
+	res := model.ShowShops()
 	fmt.Println(res)
 
 	for _, shop := range res {
-		LunchAndDinner = append(LunchAndDinner, CandidateShop{strconv.Itoa(int(shop.ID)), shop.ShopName})
+		LunchAndDinner = append(LunchAndDinner, CandidateShop{strconv.Itoa(int(shop.ID)), shop.ShopName, shop.SelfIntro})
 	}
 	// LunchAndDinner = append(LunchAndDinner, CandidateShop{"1", "栗"})
 	// LunchAndDinner = append(LunchAndDinner, CandidateShop{"2", "おんどり"})
@@ -49,28 +57,35 @@ func GetCandidates(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"lnd": LunchAndDinner, "lthan30": LongerThanThirty, "sthan30": ShorterThanThirty})
 }
 
-func GetResult(c *gin.Context) {
-	SelectedShops := []SelectedShop{}
+func GetShopStatus(c *gin.Context) {
+	id := c.Param("id")
 
-	fmt.Println(c.PostFormArray("ids[]"))
+	self_status := model.FindShop(id)
+	fmt.Println(self_status)
 
-	SelectedShops = append(SelectedShops, SelectedShop{"1", "栗"})
-	SelectedShops = append(SelectedShops, SelectedShop{"2", "おんどり"})
-	SelectedShops = append(SelectedShops, SelectedShop{"3", "La Terrasse “irisée”"})
-	SelectedShops = append(SelectedShops, SelectedShop{"4", "カフェ エトランジェ ナラッド "})
-	SelectedShops = append(SelectedShops, SelectedShop{"5", "ALL DAY DINING"})
-	SelectedShops = append(SelectedShops, SelectedShop{"6", "中川政七商店　奈良の工芸に触れる体験"})
-	SelectedShops = append(SelectedShops, SelectedShop{"7", "今西清兵衛商店"})
-	SelectedShops = append(SelectedShops, SelectedShop{"8", "ならまち格子の家"})
-	SelectedShops = append(SelectedShops, SelectedShop{"9", "瑜伽山園地"})
-	SelectedShops = append(SelectedShops, SelectedShop{"10", "寧楽美術館"})
-	SelectedShops = append(SelectedShops, SelectedShop{"11", "日本酒とおつまみ　chuin"})
-	SelectedShops = append(SelectedShops, SelectedShop{"12", "なら泉勇斎"})
-	SelectedShops = append(SelectedShops, SelectedShop{"13", "樫舎"})
-	SelectedShops = append(SelectedShops, SelectedShop{"14", "SUNNY and MORE"})
-	SelectedShops = append(SelectedShops, SelectedShop{"15", "ボリクコーヒー"})
+	rec := model.GetRecommendations(id)
+	fmt.Println(rec)
 
-	reqTime := 230
+	recby := model.GetRecommendationsByOthers(id)
+	fmt.Println(recby)
 
-	c.JSON(http.StatusOK, gin.H{"result": SelectedShops, "time": reqTime})
+	status := ShopStatus{self_status, rec, recby}
+
+	// SelectedShops = append(SelectedShops, SelectedShop{"1", "栗"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"2", "おんどり"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"3", "La Terrasse “irisée”"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"4", "カフェ エトランジェ ナラッド "})
+	// SelectedShops = append(SelectedShops, SelectedShop{"5", "ALL DAY DINING"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"6", "中川政七商店　奈良の工芸に触れる体験"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"7", "今西清兵衛商店"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"8", "ならまち格子の家"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"9", "瑜伽山園地"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"10", "寧楽美術館"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"11", "日本酒とおつまみ　chuin"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"12", "なら泉勇斎"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"13", "樫舎"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"14", "SUNNY and MORE"})
+	// SelectedShops = append(SelectedShops, SelectedShop{"15", "ボリクコーヒー"})
+
+	c.JSON(http.StatusOK, status)
 }
