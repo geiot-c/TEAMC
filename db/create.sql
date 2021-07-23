@@ -5,20 +5,58 @@ DROP TABLE IF EXISTS shops;
 CREATE TABLE IF NOT EXISTS shops (
   id integer PRIMARY KEY AUTO_INCREMENT,
   shop_name varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  self_intro varchar(100),
   latitude varchar(100),
   longitude varchar(100)
+);
+
+DROP TABLE IF EXISTS recommends;
+
+CREATE TABLE IF NOT EXISTS recommends (
+  id integer PRIMARY KEY AUTO_INCREMENT,
+  recommender_id integer,
+  recommended_shop_id integer,
+  intro varchar(100)
+);
+
+INSERT INTO recommends (
+  id,
+  recommender_id,
+  recommended_shop_id,
+  intro
+)
+VALUES (
+  1,
+  1,
+  2,
+  "毎日通ってます！"
+);
+
+INSERT INTO recommends (
+  id,
+  recommender_id,
+  recommended_shop_id,
+  intro
+)
+VALUES (
+  2,
+  3,
+  1,
+  "結構いいです。"
 );
 
 -- 昼食、夕食	栗	34.68096923516614, 135.83505440564
 INSERT INTO shops (
   id,
   shop_name,
+  self_intro,
   latitude,
   longitude
 )
 VALUES (
   1,
   "栗",
+  "これはテストですがとても美味しいです。",
   "34.68096923516614",
   "135.83505440564"
 );
@@ -27,12 +65,14 @@ VALUES (
 INSERT INTO shops (
   id,
   shop_name,
+  self_intro,
   latitude,
   longitude
 )
 VALUES (
   2,
   "おんどり",
+  "これはテストですがとてもオススメです。",
   "34.697889069751675",
   "135.8452012810097"
 );
@@ -41,12 +81,14 @@ VALUES (
 INSERT INTO shops (
   id,
   shop_name,
+  self_intro,
   latitude,
   longitude
 )
 VALUES (
   3,
   "La Terrasse “irisée”",
+  "これはテストですがぜひ来てね！",
   "34.70355272581798",
   "135.76559570736123"
 );
