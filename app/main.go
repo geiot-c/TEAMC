@@ -18,6 +18,10 @@ func main() {
 	engine.Static("/css", "./static/css")
 	engine.Static("/image", "./static/image")
 
+	engine.GET("/", func(c *gin.Context) {
+		c.Redirect(http.StatusTemporaryRedirect, "/select")
+	})
+
 	engine.GET("/select", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
