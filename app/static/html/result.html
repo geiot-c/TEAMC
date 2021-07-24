@@ -33,7 +33,7 @@ crossorigin=""></script>
                     <td width = "100%">
                         [(info["name"])]
                     </td>
-                    <td v-on:click="redirect(1)"  width = "110" rowspan="2"><img  class ="img_clk"  v-bind:src="'/image/'+1+'.jpg'"alt='Logo' height="100"> </td>
+                    <td v-on:click='redirect(info["id"])'  width = "110" rowspan="2"><img  class ="img_clk"  v-bind:src="'/image/'+info['id']+'.jpg'"alt='Logo' height="100"> </td>
                 </tr>
                 <tr>
                     <td width = "100%">[(info["intro"])]</td>

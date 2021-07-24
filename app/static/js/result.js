@@ -47,8 +47,6 @@ var res = new Vue({
     methods: {
         
         redirect: function(i) {
-            console.log(this.params)
-            this.params.push(i)
             window.location.href="/result/"+i;
         },
         gotop: function() {
