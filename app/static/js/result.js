@@ -72,7 +72,10 @@ var res = new Vue({
                     
         $.each(i["recommend"], function(index, value){
             let popup = `${value["name"]}<br>
-                <img  src="/image/${value["id"]}.jpg" height="100"><br>
+                <button class ="logo" onclick="location.href='/result/${value["id"]}'"> 
+                <img src="/image/${value["id"]}.jpg" height="100">
+                </button>
+                <br>
                 おすすめポイント<br>
                 ${value["intro"]}
                 `
