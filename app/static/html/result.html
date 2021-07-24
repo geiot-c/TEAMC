@@ -6,6 +6,15 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<link rel="stylesheet" type=text/css href="/css/main.css">
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+crossorigin=""/>
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+crossorigin=""></script>
 </head>
 <body>
     <button class ="logo" onclick="location.href='/select'"> 
@@ -14,27 +23,32 @@
     <div id = "top"></div>
     <div id = res>
         <img    class ="img_clk"  v-bind:src="'/image/'+selcted+'.jpg'"  alt='Logo' height="200">
+        <p>[(infos["self_intro"])]</p>
         <hr>
+        <p>このお店はこんなお店からおすすめされています</p>
+
         <table class="recommend">
-            <tbody>
+            <tbody v-for='info in infos["recommend_by"]'> 
                 <tr>
                     <td width = "100%">
-                        おすすめの店
+                        [(info["name"])]
                     </td>
-                    <td v-on:click="redirect(recommend)"  width = "110" rowspan="2"><img  class ="img_clk"  v-bind:src="'/image/'+recommend+'.jpg'"alt='Logo' height="100"> </td>
+                    <td v-on:click="redirect(1)"  width = "110" rowspan="2"><img  class ="img_clk"  v-bind:src="'/image/'+1+'.jpg'"alt='Logo' height="100"> </td>
                 </tr>
                 <tr>
-                    <td width = "100%">[(infos[recommend-1]["Name"])]</td>
+                    <td width = "100%">[(info["intro"])]</td>
                 </tr>
             </tbody>
         </table>
         <hr>
         おすすめされた店
         <div id= "his_img">
-            <div v-for="h in history" >
+            <!--<div v-for="h in history" >
                 <img  class ="img_clk"  v-bind:src="'/image/'+(h)+'.jpg'"  alt='Logo' height="100">
             </div>
+            !-->
         </div>
     </div>
+    <div id="mapid"></div>
     <script src="/js/result.js"></script>
 </body>

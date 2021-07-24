@@ -28,13 +28,14 @@
         <div id = shop_container>
         <table >
         <tr>
+            
             <td v-bind:_id = "info.id"  v-on:click="redirect(info.id)"  align="center" colspan="4" >
                 <img  class ="img_clk"  v-bind:src="'/image/'+info.id+'.jpg'" alt='Logo' height="200">
             </td>
         </tr>
         <tr>
             <td align="center" colspan="4">
-                [info.Name]
+                [(info["Name"])]
             </td>
         </tr>
         <tr>

@@ -16,19 +16,6 @@ var shops = new Vue({
             shops.infos=data["lnd"];
             console.log(shops.infos)
         });
-        $.get("/select/candidates")
-        .done(function( data ) {
-            console.log(data["lnd"]);
-            shops.infos=data["lnd"];
-            console.log(shops.infos)
-        });
-        $.get("/select/candidates")
-        .done(function( data ) {
-            console.log(data["lnd"]);
-            shops.infos=data["lnd"];
-            console.log(shops.infos)
-        });
-        
     },
     methods: {
         redirect: function(i) {

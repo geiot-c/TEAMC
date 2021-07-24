@@ -141,3 +141,7 @@ hr {
     opacity: 0;
     transition: opacity 1s;
   }
+#mapid { 
+    height: 500px;
+    width: 500px;
+}
