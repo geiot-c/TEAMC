@@ -1,8 +1,10 @@
 
 
+//写真clickでリンクを移動
 var shops = new Vue({
     el:'#shops',
-    delimiters: ['[', ']'],
+    //{{}}を[()]に変更
+    delimiters: ['[(', ')]'],
     data:{
         message: "hello world!",
         infos:null
@@ -14,17 +16,29 @@ var shops = new Vue({
             shops.infos=data["lnd"];
             console.log(shops.infos)
         });
+        $.get("/select/candidates")
+        .done(function( data ) {
+            console.log(data["lnd"]);
+            shops.infos=data["lnd"];
+            console.log(shops.infos)
+        });
+        $.get("/select/candidates")
+        .done(function( data ) {
+            console.log(data["lnd"]);
+            shops.infos=data["lnd"];
+            console.log(shops.infos)
+        });
+        
     },
     methods: {
-        // メソッドhalfPriceを定義
         redirect: function(i) {
-
             console.log(i)
-
-            window.location.href="/result"+"?" + $.param({"ids":[i]});
+            //window.location.href="/result"+"?" + $.param({"ids":[i]});
+            window.location.href="/result"+"/" + i;
         }
     }
 });
+//最初のフェードアウトの設定
 var samune = new Vue({
     el: '#samune',
     data: {
@@ -32,7 +46,6 @@ var samune = new Vue({
       fade : false
     },
     methods: {
-        // メソッドhalfPriceを定義
         fadeout: function() {
           　//フェードアウトだけjQueryで書くよ　ごめんね
           $('#samune').fadeOut(700, function(ob = this) {
