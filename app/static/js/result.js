@@ -28,7 +28,8 @@ var res = new Vue({
         console.log(location.href+"/status");
         $.get(location.href+"/status")
         .done(function( data ) {
-            res.infos=data
+            console.log(data);
+            res.infos=data;
             res.set_map(data)
         });
         this.recommend=(this.selcted)%13+1;
@@ -56,7 +57,7 @@ var res = new Vue({
         set_map: function(i) {
             var map = L.map('mapid', {
             center: [i["latitude"], i["longitude"]],
-            zoom: 15,
+            zoom: 12,
              }); 
         // OpenStreetMap から地図画像を読み込む
         

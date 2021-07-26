@@ -13,6 +13,23 @@
 p{
 	padding : 0px ;
 	margin: 0px;
+    font-size: 12px;
+}
+.indent{
+	padding-left : 10px ;
+    font-size: 12px;
+}
+h1{
+    font-size: 20px;
+    text-align: center;
+}
+h2{
+    font-size: 15px;
+    text-align: center;
+}
+h3{
+    font-size: 15px;
+    text-align: center;
 }
 .logo{
     display: block;
@@ -36,9 +53,6 @@ li{
     height: 100vh;
     background-color: var(--sub-color);
 }
-#samune .samune_logo{
-
-}
 #top{
 	display: block;	
 	padding : 10px ;
@@ -48,6 +62,7 @@ li{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 10px;
 }
 #top p{
 	padding : 0px ;
@@ -110,13 +125,28 @@ hr {
     margin-top: 5px;
     margin-bottom: 5px;
     border-top: 3px solid var(--line-color);
-
 }
 .recommend{
-    margin-right: 20px;
-    margin-left: 20px;
-    
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+    border-spacing: 10px;
 }
+.recommend_by{
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 30px;
+}
+#tag{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #000;
+    background: var(--sub-color);
+    /*border-bottom: solid 6px var(--line-color);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);*/
+    border-radius: 9px;
+}
+
 .img_filter{
     filter: opacity(50%);
     cursor: pointer;
@@ -126,22 +156,14 @@ hr {
     margin-left: auto;
     margin-right: auto;
 }
-.indent{
-	padding-left: 1em;
-}
+
 #image{
     padding-bottom: 5px;
 }
-/*vueの設定*/
-.v-enter-active, .v-leave-actibe {
-    transition: opacity 1s;
-  }
-  
-  .v-enter, .v-leave-to {
-    opacity: 0;
-    transition: opacity 1s;
-  }
+#res_img{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+}
 #mapid { 
     height: 500px;
-    width: 500px;
+    width: 100%;
 }

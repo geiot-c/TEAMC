@@ -23,31 +23,68 @@ crossorigin=""></script>
     <div id = "top"></div>
     <div id = res>
         <img    class ="img_clk"  v-bind:src="'/image/'+selcted+'.jpg'"  alt='Logo' height="200">
-        <p>[(infos["self_intro"])]</p>
+        <h2>[(infos["name"])]</h2>
+        <br>
+        <div class="indent"><p>[(infos["self_intro"])]</p></div>
+        <br>
         <hr>
-        <p>このお店はこんなお店からおすすめされています</p>
-
-        <table class="recommend">
-            <tbody v-for='info in infos["recommend_by"]'> 
+        <h3>このお店はこんなお店からおすすめされています</h3>
+        <br>
+        <table class="recommend_by">
+            <tbody v-for='info in infos["recommend_by"]'>
                 <tr>
                     <td width = "100%">
-                        [(info["name"])]
+                        <p>[(info["name"])]</p>
                     </td>
-                    <td v-on:click='redirect(info["id"])'  width = "110" rowspan="2"><img  class ="img_clk"  v-bind:src="'/image/'+info['id']+'.jpg'"alt='Logo' height="100"> </td>
+                    <td v-on:click='redirect(info["id"])'  width = "110" rowspan="2"><img  id ="res_img" class ="img_clk"  v-bind:src="'/image/'+info['id']+'.jpg'"alt='Logo' height="100"> </td>
                 </tr>
                 <tr>
-                    <td width = "100%">[(info["intro"])]</td>
+                    <td width = "100%"><p>[(info["intro"])]</p></td>
                 </tr>
             </tbody>
         </table>
         <hr>
-        おすすめされた店
-        <div id= "his_img">
-            <!--<div v-for="h in history" >
+        <h1>おすすめの店</h1>
+        <table class="recommend">
+<!--            <tbody v-for='info in infos["recommend"]'>
+                <tr>
+                    <td v-on:click='redirect(info["id"])'  width = "110" rowspan="2">
+                        <img  class ="img_clk"  v-bind:src="'/image/'+info['id']+'.jpg'"alt='Logo' height="100"> 
+                    </td>
+                    <td width = "100%">
+                        [(info["name"])]
+                    </td>
+                </tr>
+                <tr>
+                    <td width = "100%">[(info["intro"])]</td>
+                </tr>
+            </tbody>-->
+            <tbody v-for='info in infos["recommend"]'>
+            <tr>
+                <td v-on:click='redirect(info["id"])'  width = "33%" rowspan="2">
+                    <img  id ="res_img"  v-bind:src="'/image/'+info['id']+'.jpg'"alt='Logo' width="100%"> 
+                </td>
+                <td width = "100%" colspan="2">
+                    <p>[(info["name"])]</p>
+                </td>
+            </tr>
+            <tr>
+                <td width = "100%" colspan="2"><p>[(info["intro"])]</p></td>
+            </tr>
+
+            <tr>
+                <td id = "tag" width = "33%"><p>#インスタ映え</p></td>
+                <td id = "tag"  width = "33%"><p>#かき氷</p></td>
+                <td id = "tag"  width = "33%"><p>#一品物</p></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!--<div id= "his_img">
+            <div v-for="h in history" >
                 <img  class ="img_clk"  v-bind:src="'/image/'+(h)+'.jpg'"  alt='Logo' height="100">
             </div>
-            !-->
-        </div>
+        </div>!-->
     </div>
     <div id="mapid"></div>
     <script src="/js/result.js"></script>
