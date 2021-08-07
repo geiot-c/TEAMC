@@ -28,6 +28,18 @@ func main() {
 
 	engine.GET("/select/candidates", controller.GetCandidates)
 
+	engine.GET("/edit/:id", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "edit.html", gin.H{})
+	})
+
+	engine.POST("/edit/:id", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "edit.html", gin.H{})
+	})
+
+	engine.POST("/edit/:id/is_hot", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "edit.html", gin.H{})
+	})
+
 	engine.GET("/result/:id", func(c *gin.Context) {
 		fmt.Println(c.QueryArray("ids[]"))
 		fmt.Println(c.Param("id"))
