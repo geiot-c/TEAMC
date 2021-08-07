@@ -31,14 +31,11 @@ func main() {
 	engine.GET("/edit/:id", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "edit.html", gin.H{})
 	})
+	engine.GET("/edit/:id/status", controller.GetShopStatus)
 
-	engine.POST("/edit/:id", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "edit.html", gin.H{})
-	})
+	engine.POST("/edit/:id/status", controller.EditShopStatus)
 
-	engine.POST("/edit/:id/is_hot", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "edit.html", gin.H{})
-	})
+	engine.POST("/edit/:id/is_hot", controller.EditShopHotness)
 
 	engine.GET("/result/:id", func(c *gin.Context) {
 		fmt.Println(c.QueryArray("ids[]"))
