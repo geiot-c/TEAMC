@@ -21,10 +21,10 @@ type SelectedShop struct {
 }
 
 type ShopStatus struct {
-	model.Shop
+	model.ShopRet
 	Recommend   []model.Recommend `json:"recommend"`
 	RecommendBy []model.Recommend `json:"recommend_by"`
-	Hot         []model.Shop      `json:"hot"`
+	Hot         []model.ShopRet   `json:"hot"`
 	// model.RecommendBy
 }
 
@@ -98,9 +98,16 @@ func GetShopStatus(c *gin.Context) {
 }
 
 func EditShopStatus(c *gin.Context) {
-	// id := c.Param("id")
+	json := &model.Shop{}
+	c.BindJSON(json)
 
-	// c.JSON(http.StatusOK, status)
+	fmt.Println(json)
+	err := model.UpdateShopStatus(json)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+	} else {
+		c.JSON(http.StatusOK, err)
+	}
 }
 
 func EditShopHotness(c *gin.Context) {
