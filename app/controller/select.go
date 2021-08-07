@@ -28,6 +28,10 @@ type ShopStatus struct {
 	// model.RecommendBy
 }
 
+type ShopHotness struct {
+	IsHot bool `json:"is_hot"`
+}
+
 func GetCandidates(c *gin.Context) {
 	LunchAndDinner := []CandidateShop{}
 	LongerThanThirty := []CandidateShop{}
@@ -91,4 +95,25 @@ func GetShopStatus(c *gin.Context) {
 	// SelectedShops = append(SelectedShops, SelectedShop{"15", "ボリクコーヒー"})
 
 	c.JSON(http.StatusOK, status)
+}
+
+func EditShopStatus(c *gin.Context) {
+	// id := c.Param("id")
+
+	// c.JSON(http.StatusOK, status)
+}
+
+func EditShopHotness(c *gin.Context) {
+	id := c.Param("id")
+	json := &ShopHotness{}
+	c.ShouldBindJSON(json)
+
+	fmt.Println(json)
+	err := model.SwitchShopHotness(id, json.IsHot)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+	} else {
+		c.JSON(http.StatusOK, err)
+	}
+
 }

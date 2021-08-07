@@ -25,7 +25,7 @@ type Shop struct {
 	TouristComments []TouristComments `json:"tourist_comments"`
 	Latitude        float64           `gorm:"type:decimal(20,17)" json:"latitude"`
 	Longitude       float64           `gorm:"type:decimal(20,17)" json:"longitude"`
-	IsHot           bool              `json:"is_hot"`
+	IsHot           *bool             `json:"is_hot"`
 }
 
 type Recommend struct {
@@ -189,4 +189,51 @@ func GetHotShops(center_shop Shop) []Shop {
 
 	fmt.Println(result)
 	return result
+}
+
+// func FindShop(id string) Shop {
+// 	db := dbConnect()
+// 	defer db.Close()
+
+// 	result := Shop{}
+// 	// err := db.Find(&result).Error
+// 	// err := db.Where("id = ?", id).Find(&result).Error
+// 	err := db.Table("shops").Select("shops.id, shop_name, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude, is_hot").
+// 		Where("shops.id = ?", id).
+// 		Joins("inner join categories as cat1 on category_1_id = cat1.id").
+// 		Joins("inner join categories as cat2 on category_2_id = cat2.id").
+// 		Joins("inner join categories as cat3 on category_3_id = cat3.id").
+// 		Scan(&result).Error
+// 	// rows, err := db.Table("shops").Where("shop_name = ?", ids).Select("id, shop_name").Rows()
+// 	// rows, err := db.Table("shops").Where("shop_name in (?)", ids).Select("id, shop_name").Rows()
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+
+// 	comments := []TouristComments{}
+// 	err = db.Where("shop_id = ?", id).Find(&comments).Error
+// 	if err != nil {
+// 		panic(err.Error())
+// 	}
+
+// 	result.TouristComments = comments
+// 	// for rows.Next() {
+// 	// 	rows.Scan(&shop.ID, &shop.ShopName)
+// 	// }
+// 	return result
+// }
+
+func SwitchShopHotness(id string, is_hot bool) error {
+	db := dbConnect()
+	defer db.Close()
+
+	err := db.Table("shops").
+		Where("shops.id = ?", id).
+		Updates(map[string]interface{}{"is_hot": is_hot})
+
+	if err != nil {
+		panic(err.Error)
+	}
+
+	return err.Error
 }
