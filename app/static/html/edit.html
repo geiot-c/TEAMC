@@ -1,0 +1,73 @@
+<head>
+
+	<title>観光スポットセレクト</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js",height></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" type=text/css href="/css/main.css">
+    
+</head>
+<body class="">
+    <div id =app>
+        <transition>
+            <div id=samune v-if="seen" 　v-on:click='fadeout()'>
+                <img class = "samune_logo" src="/image/CTeam_Logo.png" alt='Logo' height="200">
+            </div>
+        </transition>
+    </div>
+
+    <img class ="logo" src="/image/CTeam_Logo.png" alt='Logo' height="80">
+	<div id = "top">
+        <p>category</p>
+	</div>
+<div id = shops>
+    <ul>
+    <li v-for="info in infos" >
+        
+        <div id = shop_container>
+        <table >
+        <tr>
+            <td v-bind:_id = "info.id"  v-on:click="redirect(info.id)"  align="center" colspan="4" >
+                <img  class ="img_clk"  v-bind:src="'/image/'+info.id+'.jpg'" alt='Logo' height="200">
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="4">
+                [info.Name]
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img align="left"   src="/image/cart.png" alt='Logo' height="30">
+            </td>
+            <td colspan="3">
+                &nbsp;
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <img align="left" src="/image/pin.png" alt='Logo' height="30">
+            </td>
+            <td>
+                <samp>
+                    &nbsp;
+                </samp>
+            </td>
+            <td>
+                <img align="right"  src="/image/good.png" alt='Logo' height="30">
+            </td>
+            <td>
+                <p>15</p>
+            </td>
+        </tr>
+    </table>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<script src="/js/index.js"></script>
+</body>
+</html>
