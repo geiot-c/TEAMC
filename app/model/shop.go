@@ -67,7 +67,7 @@ func FindShop(id string) Shop {
 	result := Shop{}
 	// err := db.Find(&result).Error
 	// err := db.Where("id = ?", id).Find(&result).Error
-	err := db.Table("shops").Select("shops.id, shop_name, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude").
+	err := db.Table("shops").Select("shops.id, shop_name, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude, is_hot").
 		Where("shops.id = ?", id).
 		Joins("inner join categories as cat1 on category_1_id = cat1.id").
 		Joins("inner join categories as cat2 on category_2_id = cat2.id").
@@ -98,7 +98,7 @@ func GetRecommendations(id string) []Recommend {
 
 	result := []Recommend{}
 	err := db.Table("recommends").
-		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude").
+		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude, is_hot").
 		Joins("inner join shops on recommended_shop_id = shops.id").
 		Where("recommender_id = ?", id).
 		Joins("inner join categories as cat1 on category_1_id = cat1.id").
@@ -138,7 +138,7 @@ func GetRecommendationsByOthers(id string) []Recommend {
 
 	result := []Recommend{}
 	err := db.Table("recommends").
-		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude").
+		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude, is_hot").
 		Joins("inner join shops on recommender_id = shops.id").
 		Where("recommended_shop_id = ?", id).
 		Joins("inner join categories as cat1 on category_1_id = cat1.id").
@@ -174,5 +174,19 @@ func GetRecommendationsByOthers(id string) []Recommend {
 
 func GetHotShops(center_shop Shop) []Shop {
 	result := []Shop{}
+	db := dbConnect()
+	defer db.Close()
+
+	err := db.Table("shops").
+		Select("shops.id, shop_name, latitude, longitude, is_hot").
+		Where("latitude between ? and ? and longitude between ? and ? and is_hot = ?", center_shop.Latitude-0.00500, center_shop.Latitude+0.00500, center_shop.Longitude-0.00500, center_shop.Longitude+0.00500, true).
+		Order("shops.id").
+		Scan(&result).Error
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	fmt.Println(result)
 	return result
 }
