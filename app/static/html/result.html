@@ -21,7 +21,7 @@ crossorigin=""></script>
         <img src="/image/CTeam_Logo.png" alt='Logo' height="100">
     </button>
     <div id = "top"></div>
-    <div id = res>
+    <div id = "res">
         <img    class ="img_clk"  v-bind:src="'/image/'+selcted+'.jpg'"  alt='Logo' height="200">
         <h2>[(infos["name"])]</h2>
         <br>
@@ -45,6 +45,7 @@ crossorigin=""></script>
         </table>
         <hr>
         <h1>おすすめの店</h1>
+
         <table class="recommend">
 <!--            <tbody v-for='info in infos["recommend"]'>
                 <tr>
@@ -62,6 +63,7 @@ crossorigin=""></script>
             <tbody v-for='info in infos["recommend"]'>
             <tr>
                 <td v-on:click='redirect(info["id"])'  width = "33%" rowspan="2">
+                    <div 
                     <img  id ="res_img"  v-bind:src="'/image/'+info['id']+'.jpg'"alt='Logo' width="100%"> 
                 </td>
                 <td width = "100%" colspan="2">
@@ -71,11 +73,11 @@ crossorigin=""></script>
             <tr>
                 <td width = "100%" colspan="2"><p>[(info["intro"])]</p></td>
             </tr>
-
             <tr>
-                <td id = "tag" width = "33%"><p>#インスタ映え</p></td>
-                <td id = "tag"  width = "33%"><p>#かき氷</p></td>
-                <td id = "tag"  width = "33%"><p>#一品物</p></td>
+
+                <td id = "tag" width = "33%"><p>#[(info["category_1"])]</p></td>
+                <td id = "tag"  width = "33%"><p>#[(info["category_2"])]</p></td>
+                <td id = "tag"  width = "33%"><p>#[(info["category_3"])]</p></td>
             </tr>
             </tbody>
         </table>
@@ -88,4 +90,5 @@ crossorigin=""></script>
     </div>
     <div id="mapid"></div>
     <script src="/js/result.js"></script>
+    <script src="/js/recommend_web_socket.js"></script>
 </body>
