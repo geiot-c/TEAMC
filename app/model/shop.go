@@ -23,8 +23,9 @@ type Shop struct {
 	Category2       string            `json:"category_2"`
 	Category3       string            `json:"category_3"`
 	TouristComments []TouristComments `json:"tourist_comments"`
-	Latitude        string            `json:"latitude"`
-	Longitude       string            `json:"longitude"`
+	Latitude        float64           `gorm:"type:decimal(20,17)" json:"latitude"`
+	Longitude       float64           `gorm:"type:decimal(20,17)" json:"longitude"`
+	IsHot           bool              `json:"is_hot"`
 }
 
 type Recommend struct {
@@ -168,5 +169,10 @@ func GetRecommendationsByOthers(id string) []Recommend {
 	}
 
 	fmt.Println(result)
+	return result
+}
+
+func GetHotShops(center_shop Shop) []Shop {
+	result := []Shop{}
 	return result
 }

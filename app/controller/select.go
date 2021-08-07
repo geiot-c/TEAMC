@@ -24,6 +24,7 @@ type ShopStatus struct {
 	model.Shop
 	Recommend   []model.Recommend `json:"recommend"`
 	RecommendBy []model.Recommend `json:"recommend_by"`
+	Hot         []model.Shop      `json:"hot"`
 	// model.RecommendBy
 }
 
@@ -69,7 +70,9 @@ func GetShopStatus(c *gin.Context) {
 	recby := model.GetRecommendationsByOthers(id)
 	fmt.Println(recby)
 
-	status := ShopStatus{self_status, rec, recby}
+	hot := model.GetHotShops(self_status)
+
+	status := ShopStatus{self_status, rec, recby, hot}
 
 	// SelectedShops = append(SelectedShops, SelectedShop{"1", "栗"})
 	// SelectedShops = append(SelectedShops, SelectedShop{"2", "おんどり"})
