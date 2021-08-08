@@ -1,73 +1,61 @@
+<html>
+
 <head>
 
-	<title>観光スポットセレクト</title>
+    <title>店舗情報登録フォーム</title>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js",height></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" ,height></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" type=text/css href="/css/main.css">
-    
+
 </head>
+
 <body class="">
-    <div id =app>
+    <div id=app>
         <transition>
             <div id=samune v-if="seen" 　v-on:click='fadeout()'>
-                <img class = "samune_logo" src="/image/CTeam_Logo.png" alt='Logo' height="200">
+                <img class="samune_logo" src="/image/CTeam_Logo.png" alt='Logo' height="200">
             </div>
         </transition>
     </div>
-
-    <img class ="logo" src="/image/CTeam_Logo.png" alt='Logo' height="80">
-	<div id = "top">
+    <img class="logo" src="/image/CTeam_Logo.png" alt='Logo' height="80">
+    <div id="top">
         <p>category</p>
-	</div>
-<div id = shops>
-    <ul>
-    <li v-for="info in infos" >
-        
-        <div id = shop_container>
-        <table >
-        <tr>
-            <td v-bind:_id = "info.id"  v-on:click="redirect(info.id)"  align="center" colspan="4" >
-                <img  class ="img_clk"  v-bind:src="'/image/'+info.id+'.jpg'" alt='Logo' height="200">
-            </td>
-        </tr>
-        <tr>
-            <td align="center" colspan="4">
-                [info.Name]
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <img align="left"   src="/image/cart.png" alt='Logo' height="30">
-            </td>
-            <td colspan="3">
-                &nbsp;
-            </td>
-        </tr>
+    </div>
+    <div id="">
+        <button class="">
 
-        <tr>
-            <td>
-                <img align="left" src="/image/pin.png" alt='Logo' height="30">
-            </td>
-            <td>
-                <samp>
-                    &nbsp;
-                </samp>
-            </td>
-            <td>
-                <img align="right"  src="/image/good.png" alt='Logo' height="30">
-            </td>
-            <td>
-                <p>15</p>
-            </td>
-        </tr>
-    </table>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<script src="/js/index.js"></script>
+        </button>
+        <form action="#" method="post">
+            <p>店舗名：<br>
+                <input type="text" name="name">
+            </p>
+            <p>紹介文：<br>
+                <input type="text" name="self_intro">
+            </p>
+            <p>ハッシュタグ1：<br>
+                <input type="text" name="hash_tag1">
+            </p>
+            <p>ハッシュタグ2：<br>
+                <input type="text" name="hash_tag2">
+            </p>
+            <p>ハッシュタグ3：<br>
+                <input type="text" name="hash_tag3">
+            </p>
+            <p>おすすめの店1：<br>
+                <input type="text" name="recommend1">
+            </p>
+            <p>おすすめの店2：<br>
+                <input type="text" name="recommend2">
+            </p>
+            <p>おすすめの店3：<br>
+                <input type="text" name="recommend3">
+            </p>
+            <p><input type="button" value="送信する" id="button2"></p>
+        </form>
+    </div>
+    <script src="/js/index.js"></script>
 </body>
+
 </html>
