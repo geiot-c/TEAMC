@@ -14,7 +14,7 @@ type TouristComments struct {
 	Comment   string `json:"comment"`
 }
 
-type Shop struct {
+type ShopRet struct {
 	// gorm.Model
 	ID              uint              `gorm:"primary_key" json:"id"`
 	ShopName        string            `gorm:"unique;not null" json:"name"`
@@ -23,13 +23,28 @@ type Shop struct {
 	Category2       string            `json:"category_2"`
 	Category3       string            `json:"category_3"`
 	TouristComments []TouristComments `json:"tourist_comments"`
-	Latitude        string            `json:"latitude"`
-	Longitude       string            `json:"longitude"`
+	Latitude        float64           `gorm:"type:decimal(20,17)" json:"latitude"`
+	Longitude       float64           `gorm:"type:decimal(20,17)" json:"longitude"`
+	IsHot           *bool             `json:"is_hot"`
+}
+
+type Shop struct {
+	// gorm.Model
+	ID              uint              `gorm:"primary_key" json:"id" binding:"required"` //binding : ginのvalidationに利用
+	ShopName        string            `gorm:"unique;not null" json:"name" binding:"required"`
+	SelfIntro       string            `json:"self_intro" binding:"required"`
+	Category1Id     uint              `json:"category_1" binding:"required"`
+	Category2Id     uint              `json:"category_2" binding:"required"`
+	Category3Id     uint              `json:"category_3" binding:"required"`
+	TouristComments []TouristComments `json:"tourist_comments" binding:"required"`
+	Latitude        float64           `gorm:"type:decimal(20,17)" json:"latitude" binding:"required"`
+	Longitude       float64           `gorm:"type:decimal(20,17)" json:"longitude" binding:"required"`
+	IsHot           *bool             `json:"is_hot" binding:"required"`
 }
 
 type Recommend struct {
 	Intro string `json:"intro"`
-	Shop
+	ShopRet
 }
 
 func dbConnect() *gorm.DB {
@@ -59,18 +74,18 @@ func ShowShops() []*Shop {
 	return result
 }
 
-func FindShop(id string) Shop {
+func FindShop(id string) ShopRet {
 	db := dbConnect()
 	defer db.Close()
 
-	result := Shop{}
+	result := ShopRet{}
 	// err := db.Find(&result).Error
 	// err := db.Where("id = ?", id).Find(&result).Error
-	err := db.Table("shops").Select("shops.id, shop_name, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude").
+	err := db.Table("shops").Select("shops.id, shop_name, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude, is_hot").
 		Where("shops.id = ?", id).
-		Joins("inner join categories as cat1 on category_1_id = cat1.id").
-		Joins("inner join categories as cat2 on category_2_id = cat2.id").
-		Joins("inner join categories as cat3 on category_3_id = cat3.id").
+		Joins("inner join categories as cat1 on category1_id = cat1.id").
+		Joins("inner join categories as cat2 on category2_id = cat2.id").
+		Joins("inner join categories as cat3 on category3_id = cat3.id").
 		Scan(&result).Error
 	// rows, err := db.Table("shops").Where("shop_name = ?", ids).Select("id, shop_name").Rows()
 	// rows, err := db.Table("shops").Where("shop_name in (?)", ids).Select("id, shop_name").Rows()
@@ -97,12 +112,12 @@ func GetRecommendations(id string) []Recommend {
 
 	result := []Recommend{}
 	err := db.Table("recommends").
-		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude").
+		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude, is_hot").
 		Joins("inner join shops on recommended_shop_id = shops.id").
 		Where("recommender_id = ?", id).
-		Joins("inner join categories as cat1 on category_1_id = cat1.id").
-		Joins("inner join categories as cat2 on category_2_id = cat2.id").
-		Joins("inner join categories as cat3 on category_3_id = cat3.id").
+		Joins("inner join categories as cat1 on category1_id = cat1.id").
+		Joins("inner join categories as cat2 on category2_id = cat2.id").
+		Joins("inner join categories as cat3 on category3_id = cat3.id").
 		Order("shops.id").
 		Scan(&result).Error
 	// rows, err := db.Table("shops").Where("shop_name in (?)", ids).Select("id, shop_name").Rows()
@@ -137,12 +152,12 @@ func GetRecommendationsByOthers(id string) []Recommend {
 
 	result := []Recommend{}
 	err := db.Table("recommends").
-		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude").
+		Select("shops.id, shop_name, intro, self_intro, cat1.category_name as category1, cat2.category_name as category2, cat3.category_name as category3, latitude, longitude, is_hot").
 		Joins("inner join shops on recommender_id = shops.id").
 		Where("recommended_shop_id = ?", id).
-		Joins("inner join categories as cat1 on category_1_id = cat1.id").
-		Joins("inner join categories as cat2 on category_2_id = cat2.id").
-		Joins("inner join categories as cat3 on category_3_id = cat3.id").
+		Joins("inner join categories as cat1 on category1_id = cat1.id").
+		Joins("inner join categories as cat2 on category2_id = cat2.id").
+		Joins("inner join categories as cat3 on category3_id = cat3.id").
 		Order("shops.id").
 		Scan(&result).Error
 	// rows, err := db.Table("shops").Where("shop_name in (?)", ids).Select("id, shop_name").Rows()
@@ -169,4 +184,49 @@ func GetRecommendationsByOthers(id string) []Recommend {
 
 	fmt.Println(result)
 	return result
+}
+
+func GetHotShops(center_shop ShopRet) []ShopRet {
+	result := []ShopRet{}
+	db := dbConnect()
+	defer db.Close()
+
+	err := db.Table("shops").
+		Select("shops.id, shop_name, latitude, longitude, is_hot").
+		Where("latitude between ? and ? and longitude between ? and ? and is_hot = ?", center_shop.Latitude-0.00500, center_shop.Latitude+0.00500, center_shop.Longitude-0.00500, center_shop.Longitude+0.00500, true).
+		Order("shops.id").
+		Scan(&result).Error
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	fmt.Println(result)
+	return result
+}
+
+func UpdateShopStatus(shop *Shop) error {
+	db := dbConnect()
+	defer db.Close()
+
+	err := db.Save(shop)
+	if err != nil {
+		panic(err.Error)
+	}
+	return err.Error
+}
+
+func SwitchShopHotness(id string, is_hot bool) error {
+	db := dbConnect()
+	defer db.Close()
+
+	err := db.Table("shops").
+		Where("shops.id = ?", id).
+		Updates(map[string]interface{}{"is_hot": is_hot})
+
+	if err != nil {
+		panic(err.Error)
+	}
+
+	return err.Error
 }

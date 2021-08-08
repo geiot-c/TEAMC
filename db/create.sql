@@ -6,11 +6,12 @@ CREATE TABLE IF NOT EXISTS shops (
   id integer PRIMARY KEY AUTO_INCREMENT,
   shop_name varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   self_intro varchar(100),
-  category_1_id integer,
-  category_2_id integer,
-  category_3_id integer,
-  latitude varchar(100),
-  longitude varchar(100)
+  category1_id integer,
+  category2_id integer,
+  category3_id integer,
+  latitude double(20,17),
+  longitude double(20,17),
+  is_hot tinyint(1) unsigned
 );
 
 DROP TABLE IF EXISTS recommends;
@@ -599,11 +600,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   1,
@@ -612,8 +614,9 @@ VALUES (
   4,
   5,
   11,
-  "34.68096923516614",
-  "135.83505440564"
+  34.68096923516614,
+  135.83505440564,
+  0
 );
 
 -- 昼食、夕食	おんどり	34.697889069751675, 135.8452012810097
@@ -621,11 +624,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   2,
@@ -634,8 +638,9 @@ VALUES (
   3,
   6,
   9,
-  "34.697889069751675",
-  "135.8452012810097"
+  34.697889069751675,
+  135.8452012810097,
+  1
 );
 
 -- 昼食、夕食	La Terrasse “irisée” 	34.70355272581798, 135.76559570736123
@@ -643,11 +648,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   3,
@@ -656,8 +662,9 @@ VALUES (
   1,
   5,
   9,
-  "34.70355272581798",
-  "135.76559570736123"
+  34.70355272581798,
+  135.76559570736123,
+  0
 );
 
 -- 昼食、夕食	カフェ エトランジェ ナラッド 	34.682309921526944, 135.82655925771624
@@ -665,11 +672,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   4,
@@ -678,8 +686,9 @@ VALUES (
   8,
   10,
   12,
-  "34.682309921526944",
-  "135.82655925771624"
+  34.682309921526944,
+  135.82655925771624,
+  0
 );
 
 -- 昼食、夕食	ALL DAY DINING	34.683420861642915, 135.82780645642984
@@ -687,11 +696,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   5,
@@ -700,8 +710,9 @@ VALUES (
   3,
   7,
   11,
-  "34.683420861642915",
-  "135.82780645642984"
+  34.683420861642915,
+  135.82780645642984,
+  0
 );
 
 -- 30分以上	中川政七商店　奈良の工芸に触れる体験	34.66844085304311, 135.83071231303978
@@ -709,11 +720,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   6,
@@ -722,8 +734,9 @@ VALUES (
   2,
   6,
   10,
-  "34.66844085304311",
-  "135.83071231303978"
+  34.66844085304311,
+  135.83071231303978,
+  0
 );
 
 -- 30分以上	今西清兵衛商店	34.6771167799442, 135.8346802547372
@@ -731,11 +744,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   7,
@@ -744,8 +758,9 @@ VALUES (
   5,
   10,
   12,
-  "34.6771167799442",
-  "135.8346802547372"
+  34.6771167799442,
+  135.8346802547372,
+  0
 );
 
 -- 30分以上	ならまち格子の家	34.67519626978004, 135.83075745458194
@@ -753,11 +768,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   8,
@@ -766,8 +782,9 @@ VALUES (
   4,
   7,
   10,
-  "34.67519626978004",
-  "135.83075745458194"
+  34.67519626978004,
+  135.83075745458194,
+  0
 );
 
 -- 30分以上	瑜伽山園地	34.6795394700259, 135.83924008867956
@@ -775,11 +792,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   9,
@@ -788,8 +806,9 @@ VALUES (
   6,
   8,
   10,
-  "34.6795394700259",
-  "135.83924008867956"
+  34.6795394700259,
+  135.83924008867956,
+  1
 );
 
 -- 30分以上	寧楽美術館	34.68621397298806, 135.83719518341763
@@ -797,11 +816,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   10,
@@ -810,8 +830,9 @@ VALUES (
   1,
   4,
   7,
-  "34.68621397298806",
-  "135.83719518341763"
+  34.68621397298806,
+  135.83719518341763,
+  0
 );
 
 -- 30分以下	日本酒とおつまみ　chuin	34.67879867636942, 135.83066651225275
@@ -819,11 +840,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   11,
@@ -832,8 +854,9 @@ VALUES (
   2,
   5,
   7,
-  "34.67879867636942",
-  "135.83066651225275"
+  34.67879867636942,
+  135.83066651225275,
+  1
 );
 
 -- 30分以下	なら泉勇斎	34.679852836545734, 135.82983086566745
@@ -841,11 +864,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   12,
@@ -854,8 +878,9 @@ VALUES (
   4,
   5,
   6,
-  "34.679852836545734",
-  "135.82983086566745"
+  34.679852836545734,
+  135.82983086566745,
+  0
 );
 
 -- 30分以下	樫舎	34.67875598474761, 135.8312995000453
@@ -863,11 +888,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   13,
@@ -876,8 +902,9 @@ VALUES (
   10,
   11,
   12,
-  "34.67875598474761",
-  "135.8312995000453"
+  34.67875598474761,
+  135.8312995000453,
+  1
 );
 
 -- 30分以下	SUNNY and MORE	34.679749291117396, 135.8312133815698
@@ -885,11 +912,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   14,
@@ -898,8 +926,9 @@ VALUES (
   5,
   7,
   9,
-  "34.679749291117396",
-  "135.8312133815698"
+  34.679749291117396,
+  135.8312133815698,
+  0
 );
 
 -- 30分以下	ボリクコーヒー	34.67665865074141, 135.83004641964288"
@@ -907,11 +936,12 @@ INSERT INTO shops (
   id,
   shop_name,
   self_intro,
-  category_1_id,
-  category_2_id,
-  category_3_id,
+  category1_id,
+  category2_id,
+  category3_id,
   latitude,
-  longitude
+  longitude,
+  is_hot
 )
 VALUES (
   15,
@@ -920,6 +950,7 @@ VALUES (
   1,
   2,
   3,
-  "34.67665865074141",
-  "135.83004641964288"
+  34.67665865074141,
+  135.83004641964288,
+  0
 );

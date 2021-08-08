@@ -21,10 +21,15 @@ type SelectedShop struct {
 }
 
 type ShopStatus struct {
-	model.Shop
+	model.ShopRet
 	Recommend   []model.Recommend `json:"recommend"`
 	RecommendBy []model.Recommend `json:"recommend_by"`
+	Hot         []model.ShopRet   `json:"hot"`
 	// model.RecommendBy
+}
+
+type ShopHotness struct {
+	IsHot bool `json:"is_hot"`
 }
 
 func GetCandidates(c *gin.Context) {
@@ -69,7 +74,9 @@ func GetShopStatus(c *gin.Context) {
 	recby := model.GetRecommendationsByOthers(id)
 	fmt.Println(recby)
 
-	status := ShopStatus{self_status, rec, recby}
+	hot := model.GetHotShops(self_status)
+
+	status := ShopStatus{self_status, rec, recby, hot}
 
 	// SelectedShops = append(SelectedShops, SelectedShop{"1", "栗"})
 	// SelectedShops = append(SelectedShops, SelectedShop{"2", "おんどり"})
@@ -88,4 +95,32 @@ func GetShopStatus(c *gin.Context) {
 	// SelectedShops = append(SelectedShops, SelectedShop{"15", "ボリクコーヒー"})
 
 	c.JSON(http.StatusOK, status)
+}
+
+func EditShopStatus(c *gin.Context) {
+	json := &model.Shop{}
+	c.BindJSON(json)
+
+	fmt.Println(json)
+	err := model.UpdateShopStatus(json)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+	} else {
+		c.JSON(http.StatusOK, err)
+	}
+}
+
+func EditShopHotness(c *gin.Context) {
+	id := c.Param("id")
+	json := &ShopHotness{}
+	c.ShouldBindJSON(json)
+
+	fmt.Println(json)
+	err := model.SwitchShopHotness(id, json.IsHot)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, err)
+	} else {
+		c.JSON(http.StatusOK, err)
+	}
+
 }
