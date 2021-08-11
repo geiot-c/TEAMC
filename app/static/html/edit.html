@@ -12,20 +12,13 @@
 </head>
 
 <body class="">
-    <div id=app>
-        <transition>
-            <div id=samune v-if="seen" 　v-on:click='fadeout()'>
-                <img class="samune_logo" src="/image/CTeam_Logo.png" alt='Logo' height="200">
-            </div>
-        </transition>
-    </div>
     <img class="logo" src="/image/CTeam_Logo.png" alt='Logo' height="80">
     <div id="top">
         <p>category</p>
     </div>
-    <div id="">
-        <button class="">
-
+    <div id="app">
+        <button class="Hima_button" v-on:click="send()">
+            <p>時間あり</p>
         </button>
         <form action="#" method="post">
             <p>店舗名：<br>
@@ -55,7 +48,7 @@
             <p><input type="button" value="送信する" id="button2"></p>
         </form>
     </div>
-    <script src="/js/index.js"></script>
+    <script src="/js/edit.js"></script>
 </body>
 
 </html>
